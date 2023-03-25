@@ -17,11 +17,12 @@ public class Main
 
         //make sockets
         ServerSocket server = null;
+
         Socket socket = null;
         DataInputStream in = null;
         try
         {
-            //server socket: sets up the socket for the server to recieve stuff
+            //server socket: sets up the socket for the server to receive stuff
             server = new ServerSocket(80);
             System.out.println("waiting");
             socket = server.accept();

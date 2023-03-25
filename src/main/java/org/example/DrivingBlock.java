@@ -60,7 +60,7 @@ public class DrivingBlock
         String s = "Driver: "+driver.getDisplayname();
         s+= "\nCapacity: "+passengerLimit;
         s+= "\nPassengers: "+passengers.toString();
-        s+= "\nGOing from: "+starting+" to: "+destination;
+        s+= "\nGoing from: "+starting+" to: "+destination;
         s+= "\n Time: "+date+", leaving "+departTime+", returning "+returnTime;
         return s;
     }
