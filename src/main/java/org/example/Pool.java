@@ -1,12 +1,12 @@
-package com.example.hooscarserver;
+package org.example;
 import java.lang.reflect.Array;
 import java.util.*;
 
 public class Pool {
 
     private String ID;
-    private List<Profile>() members;
-    private List<Profile>() pendingMembers;
+    private List<Profile> members;
+    private List<Profile> pendingMembers;
     private Profile host;
 
     public Pool (String id, Profile host) {
@@ -40,16 +40,16 @@ public class Pool {
         this.host = host;
     }
 
+    public boolean removePendingMember(Profile p)
+    {
+        return pendingMembers.remove(p);
+    }
     public void addMember(Profile p) {
         members.add(p);
         removePendingMember(p);
     }
     public boolean removeMember(Profile p){
         return members.remove(p);
-    }
-    public boolean removePendingMember(Profile p)
-    {
-        return pendingMembers(p);
     }
     public void addPendingMember(Profile p) {
         pendingMembers.add(p);
