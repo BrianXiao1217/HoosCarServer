@@ -21,7 +21,7 @@ public class Profile {
     public void setDisplayname(String display){
         displayname = display;
     }
-    public String getDisplayname(String display){
+    public String getDisplayname(){
         return displayname;
     }
     public void setPhoneNumber(String phone){

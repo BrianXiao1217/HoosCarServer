@@ -7,23 +7,32 @@ public class DrivingBlock
     private Profile driver;
     private List<Profile> passengers;
     private int passengerLimit;
-    private String destination;
+    private String starting, destination;
     private String date, departTime, returnTime;
 
     public DrivingBlock()
     {
-        driver = null;
-        passengers = null;
+        driver = new Profile();
+        driver.setDisplayname("Needs Driver");
+        passengers =  new ArrayList<Profile>();
         passengerLimit = 0;
-        destination = "";
+        starting = destination = "";
         date = "";
-        departTime = "";
-        returnTime = "";
+        departTime = returnTime = "";
     }
 
     public void setDriver(Profile d)
     {
         driver = d;
+    }
+    public void setTrip(String s, String d)
+    {
+        starting = s;
+        destination = d;
+    }
+    public void setStart(String s)
+    {
+        starting = s;
     }
     public void setDestination(String d)
     {
@@ -34,5 +43,25 @@ public class DrivingBlock
         date = d;
         departTime = dt;
         returnTime = rt;
+    }
+    public boolean addPassenger(Profile p)
+    {
+        if(passengers.size() >= passengerLimit)
+            return false;
+        return passengers.add(p);
+    }
+    public void changeCapacity(int i)
+    {
+        passengerLimit = i;
+    }
+    public String toString()
+    {
+
+        String s = "Driver: "+driver.getDisplayname();
+        s+= "\nCapacity: "+passengerLimit;
+        s+= "\nPassengers: "+passengers.toString();
+        s+= "\nGOing from: "+starting+" to: "+destination;
+        s+= "\n Time: "+date+", leaving "+departTime+", returning "+returnTime;
+        return s;
     }
 }
