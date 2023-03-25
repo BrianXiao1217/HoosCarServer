@@ -1,4 +1,4 @@
-package com.example.hooscarclient;
+package com.example.hooscarserver;
 import java.lang.reflect.Array;
 import java.util.*;
 

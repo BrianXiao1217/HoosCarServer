@@ -1,4 +1,4 @@
-package com.example.hooscarclient;
+package com.example.hooscarserver;
 import java.util.*;
 
 public class Profile {
