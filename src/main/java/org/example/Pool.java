@@ -2,6 +2,7 @@ package org.example;
 import java.lang.reflect.Array;
 import java.util.*;
 
+
 public class Pool
 {
     private String ID;
@@ -9,6 +10,7 @@ public class Pool
     private List<Profile> members;
     private List<Profile> pendingMembers;
     private Profile host;
+
 
     public Pool (String id, String n, Profile host)
     {
@@ -18,6 +20,7 @@ public class Pool
         pendingMembers = new ArrayList<Profile>();
         this.host = host;
     }
+
 
     //accessors
     public String getID()
@@ -41,6 +44,7 @@ public class Pool
         return host;
     }
 
+
     //modifiers
     public void setID(String ID)
     {
@@ -54,6 +58,7 @@ public class Pool
     {
         this.host = host;
     }
+
 
     //add member
     public boolean removePendingMember(Profile p)
@@ -74,3 +79,4 @@ public class Pool
         pendingMembers.add(p);
     }
 }
+

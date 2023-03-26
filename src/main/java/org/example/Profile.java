@@ -1,33 +1,35 @@
 package org.example;
 import java.util.*;
 
+
 public class Profile
 {
     private String phoneNumber;
     private String username;
-    private String displayname;
+    private String displayName;
     private String password;
     private List<String> carPools;
     private List<String> hostedPools;
-    public Profile(String phone, String user, String pass)
+    public Profile(String phone, String user, String pass, String disp)
     {
         phoneNumber = phone;
         username = user;
         password = pass;
+        displayName = disp;
         carPools = new ArrayList<String>();
         hostedPools = new ArrayList<String>();
     }
     public Profile()
     {
-        this("","","");
+        this("","","","");
     }
     public void setDisplayname(String display)
     {
-        displayname = display;
+        displayName = display;
     }
     public String getDisplayname()
     {
-        return displayname;
+        return displayName;
     }
     public void setPhoneNumber(String phone)
     {

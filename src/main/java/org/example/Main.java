@@ -1,6 +1,10 @@
 package org.example;
 import java.net.*;
 import java.io.*;
+
+
+
+
 public class Main
 {
     public static void main(String[] args)
@@ -14,6 +18,7 @@ public class Main
         }
         catch (UnknownHostException e)
         { System.exit(0); }
+
 
         //make sockets
         ServerSocket server = null;
@@ -38,6 +43,7 @@ public class Main
             System.exit(0);
         }
 
+
         //communicates with client
         String line = "";
         while(!line.equals("terminate"))
@@ -56,6 +62,7 @@ public class Main
             }
         }
 
+
         //close socket at end of communicating
         try
         {
@@ -70,3 +77,4 @@ public class Main
         }
     }
 }
+

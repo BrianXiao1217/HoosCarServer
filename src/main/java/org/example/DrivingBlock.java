@@ -2,6 +2,7 @@ package org.example;
 import java.lang.reflect.Array;
 import java.util.*;
 
+
 public class DrivingBlock
 {
     private Profile driver;
@@ -9,6 +10,7 @@ public class DrivingBlock
     private int passengerLimit;
     private String starting, destination;
     private String date, departTime, returnTime;
+
 
     public DrivingBlock()
     {
@@ -20,6 +22,7 @@ public class DrivingBlock
         date = "";
         departTime = returnTime = "";
     }
+
 
     public void setDriver(Profile d)
     {
@@ -56,6 +59,7 @@ public class DrivingBlock
     }
     public String toString()
     {
+
 
         String s = "Driver: "+driver.getDisplayname();
         s+= "\nCapacity: "+passengerLimit;
