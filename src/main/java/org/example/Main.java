@@ -7,6 +7,8 @@ public class Main
     public static void main(String[] args)
     {
         RequestHandler r = new RequestHandler();
+        System.out.println(r.retrieve("createProfile John%20Doe password123 JohnD"));
+
         //gets IP address of local host
         try
         {

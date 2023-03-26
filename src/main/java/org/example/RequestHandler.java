@@ -27,7 +27,7 @@ public class RequestHandler
         allPools.add(samplePool);
         allProfiles.add(sampleHost);
     }
-    public String createProfile(String user, String display, String pass)
+    public String createProfile(String user, String pass, String display)
     {
         List<Profile> filtered = allProfiles.stream()
                 .filter(s -> s.getUsername().equals(user))
@@ -177,7 +177,7 @@ public class RequestHandler
     {
         RequestHandler handler = new RequestHandler();
         System.out.println("attempting to create profile...");
-        System.out.println(handler.retrieve("createProfile jhndoe John%20Doe password123"));
+        System.out.println(handler.retrieve("createProfile John%20Doe password123 JohnD"));
         System.out.println("attempting login attempt with wrong password...");
         System.out.println(handler.retrieve("login jhndoe wrongpassword"));
         System.out.println("attempting to login with the profile...");
