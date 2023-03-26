@@ -27,7 +27,7 @@ public class RequestHandler
         allPools.add(samplePool);
         allProfiles.add(sampleHost);
     }
-    private String createProfile(String user, String display, String pass)
+    public String createProfile(String user, String display, String pass)
     {
         List<Profile> filtered = allProfiles.stream()
                 .filter(s -> s.getUsername().equals(user))
@@ -40,7 +40,7 @@ public class RequestHandler
         }
         return "failed";
     }
-    private String tryLogin(String user, String pass)
+    public String tryLogin(String user, String pass)
     {
         List<Profile> filtered = allProfiles.stream()
                 .filter(s -> s.getUsername().equals(user))
@@ -54,18 +54,18 @@ public class RequestHandler
                 return "success";
             }
         }
-        return "failure";
+        return "failureLogin";
     }
-    private String getProfilePools()
+    public String getProfilePools()
     {
         if(currentProfile == null)
-            return "failure";
+            return "failureGetProfilePools";
         return "success";
     }
-    private String joinPool(String pool_id)
+    public String joinPool(String pool_id)
     {
         if(currentProfile == null)
-            return "failure";
+            return "failureJoinPool_NoCurrentProfile";
         List<Pool> filtered = allPools.stream()
                 .filter(s -> s.getID().equals(pool_id))
                 .collect(toList());
@@ -74,12 +74,12 @@ public class RequestHandler
             filtered.get(0).addPendingMember(currentProfile);
             return "success";
         }
-        return "failure";
+        return "failureJoinPool_end";
     }
-    private String showPendingMembers()
+    public String showPendingMembers()
     {
         if(currentProfile == null || currentPool == null)
-            return "failure";
+            return "failureShowPending_allNull";
         List<Pool> filtered = allPools.stream()
                 .filter(s -> s.getID().equals(currentPool.getID()))
                 .collect(toList());
@@ -97,30 +97,30 @@ public class RequestHandler
                 answer += " ";
             }
         }
-        return "failure";
+        return "failureShowPending_end";
     }
-    private String selectPool(String pool_id)
+    public String selectPool(String pool_id)
     {
         if(currentProfile == null)
-            return "failure";
+            return "failureSelectPool_NoCurrentProfile";
         List<Pool> filteredPools = allPools.stream()
                 .filter(s -> s.getID().equals(pool_id))
                 .collect(toList());
         if(filteredPools.size() == 0)
-            return "failure";
+            return "failureSelectPool_sizePools=0";
         Pool attemptedPool = filteredPools.get(0);
         List<Profile> filteredProfiles = attemptedPool.getMembers().stream()
                 .filter(s -> s.getUsername().equals(currentProfile.getUsername()))
                 .collect(toList());
         if(filteredProfiles.size() == 0)
-            return "failure";
+            return "failureSelectPool_sizeProfiles=0";
         currentPool = attemptedPool;
         return "success";
     }
-    private String allowPending(String user)
+    public String allowPending(String user)
     {
         if(currentProfile == null || currentPool == null)
-            return "failure";
+            return "failureAllowPending_null";
         List<Pool> filtered = allPools.stream()
                 .filter(s -> s.getID().equals(currentPool.getID()))
                 .collect(toList());
@@ -129,7 +129,7 @@ public class RequestHandler
                 .filter(u -> u.getUsername().equals(user))
                 .collect(toList());
         if(filteredProfiles.size() == 0)
-            return "failure";
+            return "failureAllowPending_size=0";
         Profile toAdd = filteredProfiles.get(0);
         if(filtered.get(0).getHost().getUsername().equals(currentProfile.getUsername()))
         {
@@ -137,13 +137,13 @@ public class RequestHandler
             toAdd.addPool(filtered.get(0).getID());
             return "success";
         }
-        return "failure";
+        return "failureAllowPending_end";
     }
     public String retrieve(String command)
     {
         String[] com = command.split(" ");
-        if(com.length<1)
-            return "failure";
+        if(com.length < 1)
+            return "failureRetrieve";
         String order = com[0];
         switch(order)
         {
@@ -169,7 +169,7 @@ public class RequestHandler
                 return "";
             //TODO: deletePool, deleteProfile, createPool
             default:
-                return "failure";
+                return "failureRetrieve_SwitchCase                                                                      ";
         }
     }
 

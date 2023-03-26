@@ -2,13 +2,11 @@ package org.example;
 import java.net.*;
 import java.io.*;
 
-
-
-
 public class Main
 {
     public static void main(String[] args)
     {
+        RequestHandler r = new RequestHandler();
         //gets IP address of local host
         try
         {
@@ -22,16 +20,20 @@ public class Main
 
         //make sockets
         ServerSocket server = null;
-        PrintStream p = null;
         Socket socket = null;
+
+        //data into server
         DataInputStream in = null;
+        //write data out of server
+        PrintStream p = null;
         try
         {
             //server socket: sets up the socket for the server to receive stuff
             server = new ServerSocket(80);
             System.out.println("waiting");
             socket = server.accept();
-            System.out.println("connecting");
+            System.out.println("connected");
+
             //socket input (reads data from client)
             in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             //socket output (sends data to client)
@@ -52,8 +54,13 @@ public class Main
             {
                 line = in.readUTF();
                 System.out.println(line);
-                System.out.println("toString method called successfully");
                 p.println(line);
+                String user = line.substring(0, line.indexOf(" "));
+                String pass = line.substring(line.indexOf(" ")+1);
+                System.out.println(user);
+                System.out.println(pass);
+                String result = r.tryLogin(user, pass);
+                System.out.println(result);
             }
             catch(IOException e)
             {
