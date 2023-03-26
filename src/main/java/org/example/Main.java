@@ -56,11 +56,8 @@ public class Main
             {
                 line = in.readUTF();
                 System.out.println(line);
-                String user = line.substring(0, line.indexOf(" "));
-                String pass = line.substring(line.indexOf(" ")+1);
-                System.out.println(user);
-                System.out.println(pass);
-                String result = r.tryLogin(user, pass);
+
+                String result = r.retrieve(line);
                 System.out.println(result);
                 p.println(result);
             }

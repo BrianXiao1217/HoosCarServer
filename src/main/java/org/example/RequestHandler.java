@@ -40,6 +40,15 @@ public class RequestHandler
         }
         return "failed";
     }
+    public String getCurrentProfile(String user)
+    {
+        List<Profile> filtered = allProfiles.stream()
+                .filter(s -> s.getUsername().equals(user))
+                .collect(toList());
+        if(filtered.size() == 1)
+            return filtered.get(0).getUsername();
+        return "failureGetCurrentProfile";
+    }
     public String tryLogin(String user, String pass)
     {
         List<Profile> filtered = allProfiles.stream()
@@ -149,6 +158,8 @@ public class RequestHandler
         {
             case "createProfile":
                 return this.createProfile(com[1],com[2],com[3]);
+            case "getCurrentProfile":
+                return this.getCurrentProfile(com[1]);
             case "login":
                 return this.tryLogin(com[1],com[2]);
             case "getAllPools":
