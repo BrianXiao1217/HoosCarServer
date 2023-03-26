@@ -17,7 +17,7 @@ public class Main
 
         //make sockets
         ServerSocket server = null;
-
+        PrintStream p = null;
         Socket socket = null;
         DataInputStream in = null;
         try
@@ -27,8 +27,10 @@ public class Main
             System.out.println("waiting");
             socket = server.accept();
             System.out.println("connecting");
-            //socket input
+            //socket input (reads data from client)
             in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            //socket output (sends data to client)
+            p = new PrintStream(socket.getOutputStream());
         }
         catch(IOException e)
         {
@@ -43,12 +45,9 @@ public class Main
             try
             {
                 line = in.readUTF();
-                DrivingBlock d = new DrivingBlock();
-                d.setDestination(line);
                 System.out.println(line);
-                String toString = d.toString();
                 System.out.println("toString method called successfully");
-                System.out.println(d.toString());
+                p.println(line);
             }
             catch(IOException e)
             {
@@ -63,6 +62,7 @@ public class Main
             socket.close();
             server.close();
             in.close();
+            p.close();
         }
         catch(IOException e)
         {
