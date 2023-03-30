@@ -7,7 +7,9 @@ public class Main
     public static void main(String[] args)
     {
         RequestHandler r = new RequestHandler();
-        System.out.println(r.retrieve("createProfile John%20Doe password123 JohnD"));
+        Processor pr = new Processor();
+
+        System.out.println(r.retrieve("createProfile jd qqq JohnD"));
 
         //gets IP address of local host
         try
@@ -17,7 +19,9 @@ public class Main
             System.out.println(ip.getHostName());
         }
         catch (UnknownHostException e)
-        { System.exit(0); }
+        {
+            System.exit(0);
+        }
 
 
         //make sockets
@@ -41,7 +45,7 @@ public class Main
             //socket output (sends data to client)
             p = new PrintStream(socket.getOutputStream());
         }
-        catch(IOException e)
+        catch (IOException e)
         {
             System.out.println("io exception");
             System.exit(0);
@@ -49,27 +53,7 @@ public class Main
 
 
         //communicates with client
-        String line = "";
-        while(!line.equals("terminate"))
-        {
-            try
-            {
-                line = in.readUTF();
-                System.out.println(line);
-                String user = line.substring(0, line.indexOf(" "));
-                String pass = line.substring(line.indexOf(" ")+1);
-                System.out.println(user);
-                System.out.println(pass);
-                String result = r.tryLogin(user, pass);
-                System.out.println(result);
-                p.println(result);
-            }
-            catch(IOException e)
-            {
-                System.out.println("bad line");
-                System.exit(0);
-            }
-        }
+        pr.process(r, in , p);
 
 
         //close socket at end of communicating
